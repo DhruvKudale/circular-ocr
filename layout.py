@@ -19,7 +19,7 @@ def resize_image_cv2(image_path):
     if w > THRESH:
         return img
     # Define new width
-    new_width = 1024
+    new_width = THRESH
     scale_factor = new_width / w
     new_height = int(h * scale_factor)
     # Resize with interpolation

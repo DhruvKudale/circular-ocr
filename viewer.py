@@ -4,6 +4,7 @@ import os
 from main import get_image_ocr
 
 # Streamlit UI setup
+st.set_page_config(layout="wide")
 st.title("OCR For Circulars")
 
 # Upload image
@@ -27,10 +28,12 @@ if st.button("Run OCR"):
         image = Image.open(uploaded_image)
         response = get_image_ocr(image_path, ocr_mode, lang)
 
-        col1, col2 = st.columns(2)
+        col1, col2, col3 = st.columns(3)
         with col1:
             st.image(image, caption="Uploaded Image", use_column_width=True)
         with col2:
+            st.text_area("Extracted Text", value=response, height=1000)
+        with col3:
             st.write(response)
 
         # Clean up temporary file
