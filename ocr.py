@@ -169,7 +169,5 @@ def circular_to_txt(img_path, lang):
                 # Can use class_names[cls] for classname instead
                 hocr_elements += hocr
 
-        # Now we generate HOCRs using Tesseract
-        print('We will OCR the image ' + finalimgtoocr)
-        final_hocr = '<html><body>' + hocr_elements + '</body></html>'
+        final_hocr = hocr_elements
         return final_hocr
