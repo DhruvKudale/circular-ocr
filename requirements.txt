@@ -1,10 +1,10 @@
 beautifulsoup4==4.13.3
-doclayout_yolo==0.0.2
+doclayout_yolo==0.0.3
 opencv_python==4.10.0.84
 pillow==10.2.0
 pytesseract==0.3.13
 streamlit==1.39.0
-torch==2.0.1
-torchvision==0.15.2
+torch==2.3.0
+torchvision==0.18.0
 transformers==4.45.0
 html2text
