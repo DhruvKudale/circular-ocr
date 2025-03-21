@@ -8,6 +8,10 @@ model_path = str(current_dir) + "/model/doclayout_yolo_dsb_1024.pt"
 # print(model_path)
 model = YOLOv10(model_path)
 
+# class_names = {0: 'title', 1: 'plain text', 2: 'abandon', 3: 'figure',
+# 4: 'figure_caption', 5: 'table', 6: 'table_caption', 7: 'table_footnote', 8: 'isolate_formula', 9: 'formula_caption'}
+
+
 def resize_image_cv2(image_path):
     img = cv2.imread(image_path)
     h, w = img.shape[:2]

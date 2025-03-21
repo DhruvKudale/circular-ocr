@@ -3,7 +3,7 @@ import pytesseract
 from layout import resize_image_cv2
 from ocr import circular_to_txt
 import html2text
-
+import os
 
 def get_image_ocr(image_path, ocr_mode, lang):
     img = resize_image_cv2(image_path)
@@ -16,6 +16,11 @@ def get_image_ocr(image_path, ocr_mode, lang):
     if ocr_mode == 2:
         html_content = circular_to_txt(img_file, lang)
         markdown_content = html2text.html2text(html_content)
+        # Remove temp files
+        files_to_remove = ['temp.jpg', 'temp-table.jpg', 'temp-text.jpg']
+        for f in files_to_remove:
+            if os.path.exists(f):
+                os.remove(f)
         return markdown_content
 
 if __name__ == '__main__':
