@@ -38,7 +38,7 @@ def get_cols_from_tatr(img_file, col_thresh = 0.7, col_nms = 0.1):
         return []
     return final_col_results.tolist()
 
-def get_rows_from_tatr(img_file, col_thresh = 0.7, col_nms = 0.1):
+def get_rows_from_tatr(img_file, col_thresh = 0.5, col_nms = 0.1):
     image = Image.open(img_file).convert("RGB")
     width, height = image.size
     image.resize((int(width * 0.5), int(height * 0.5)))

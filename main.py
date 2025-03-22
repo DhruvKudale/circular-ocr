@@ -2,7 +2,8 @@ import cv2
 import pytesseract
 from layout import resize_image_cv2
 from ocr import circular_to_txt
-import html2text
+# import html2text
+import markdownify
 import os
 
 def get_image_ocr(image_path, ocr_mode, lang):
@@ -15,7 +16,8 @@ def get_image_ocr(image_path, ocr_mode, lang):
         # Plain Tesseract
     if ocr_mode == 2:
         html_content = circular_to_txt(img_file, lang)
-        markdown_content = html2text.html2text(html_content)
+        # print(html_content)
+        markdown_content = markdownify.markdownify(html_content)
         # Remove temp files
         files_to_remove = ['temp.jpg', 'temp-table.jpg', 'temp-text.jpg']
         for f in files_to_remove:

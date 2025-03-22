@@ -164,6 +164,8 @@ def circular_to_txt(img_path, lang):
                 tab_hocr = get_table_hocr(finalimgtoocr, bbox, lang)
                 hocr_elements += tab_hocr
                 tab_cnt += 1
+            # elif cls == 2: # Abandon class
+            #     continue
             else:
                 hocr = get_text_hocr(finalimgtoocr, bbox, lang)
                 # Can use class_names[cls] for classname instead

@@ -26,15 +26,18 @@ if st.button("Run OCR"):
 
         # Display the uploaded image and OCR response side by side
         image = Image.open(uploaded_image)
-        response = get_image_ocr(image_path, ocr_mode, lang)
+        plain_text_response = get_image_ocr(image_path, 1, lang)
+        markdown_response = get_image_ocr(image_path, 2, lang)
+        l1 = len(plain_text_response)
+        l2 = len(markdown_response)
 
         col1, col2, col3 = st.columns(3)
         with col1:
             st.image(image, caption="Uploaded Image", use_column_width=True)
         with col2:
-            st.text_area("Extracted Text", value=response, height=1000)
+            st.text_area(f'Plain Text : {l1}', value=plain_text_response, height=1000)
         with col3:
-            st.write(response)
+            st.text_area(f'Custom Markdown : {l2}', value=markdown_response, height=1000)
 
         # Clean up temporary file
         os.remove(image_path)
