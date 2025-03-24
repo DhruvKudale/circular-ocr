@@ -81,8 +81,8 @@ def find_text_for_cell(ocr_data, cell_bbox, iou_threshold = 0.0000000000000001, 
             words_in_cell.append((word, word_y, word_x))
             used_indices.add(i)  # Mark this word as used
 
-    # Sort words by reading order: first by Y (top to bottom), then X (left to right)
-    words_in_cell.sort(key=lambda item: int(0.1 * item[1]) + item[2])
+    # Sort words by reading order: first by Y (top to bottom) and then X (left to right)
+    words_in_cell.sort(key=lambda item: (int(0.075 * item[1]), item[2]))
 
     # Extract only the words and join them
     cell_text = [word[0] for word in words_in_cell]
@@ -93,11 +93,15 @@ def get_table_ocr_all_at_once(cropped_img, soup, lang, x1, y1):
     # Full Table OCR
     ocr_data = get_full_table_ocr_data(cropped_img, lang=lang)
     used_indices = None
+    h, w, c = cropped_img.shape
     for bbox in soup.find_all('td'):
         # Replace the content inside the div with its 'title' attribute value
         ocr_bbox = bbox['bbox'].split(' ')
         ocr_bbox = list(map(int, ocr_bbox))
         bbox.string, used_indices = find_text_for_cell(ocr_data, ocr_bbox, used_indices=used_indices)
+        # if ocr_bbox[3] - ocr_bbox[1] > int(0.1 * h) or len(bbox.string.split()) > 5:
+        #     # For multiline take no risks
+        #     bbox.string = ''
         if bbox.string.strip() == "":
             bbox.string = get_cell_ocr(cropped_img, ocr_bbox, lang)
         # Correct wrt table coordinates

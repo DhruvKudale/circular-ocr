@@ -35,15 +35,15 @@ if st.button("Run OCR"):
         with col1:
             st.image(image, caption="Uploaded Image", use_column_width=True)
         with col2:
-            st.text_area(f'Plain Text : {l1}', value=plain_text_response, height=1000)
+            st.write('Rendered HTML')
+            st.markdown(markdown_response, unsafe_allow_html=True)
         
         
         col3, col4 = st.columns(2)
         with col3:
             st.text_area(f'Custom HTML : {l2}', value=markdown_response, height=1000)
         with col4:
-            st.write('Rendered HTML')
-            st.markdown(markdown_response, unsafe_allow_html=True)
+            st.text_area(f'Plain Text : {l1}', value=plain_text_response, height=1000)
 
         # Clean up temporary file
         os.remove(image_path)
