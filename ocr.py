@@ -158,7 +158,6 @@ def get_table_hocr(finalimgtoocr, bbox, lang):
 def circular_to_txt(img_path, lang):
         finalimgtoocr = img_path
         dets = get_circular_layout(finalimgtoocr)
-        dets.sort(key = lambda x : x[1][1])
         hocr_elements = ''
         tab_cnt = 1
         for det in dets:
