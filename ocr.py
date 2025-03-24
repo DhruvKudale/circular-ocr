@@ -113,7 +113,7 @@ def get_text_hocr(image_path, bbox, lang):
     cropped_image = image[bbox[1]: bbox[3], bbox[0]: bbox[2]]
     cv2.imwrite('temp-text.jpg', cropped_image)
     extracted_text = pytesseract.image_to_string('temp-text.jpg', lang=lang, config='--psm 6')
-    hocr = '<p>' + extracted_text + '</p>'
+    hocr = f'<p bbox=\"{bbox[0]} {bbox[1]} {bbox[2]} {bbox[3]}\">' + extracted_text + '</p>'
     return hocr
 
 def get_table_hocr(finalimgtoocr, bbox, lang):
@@ -135,7 +135,8 @@ def get_table_hocr(finalimgtoocr, bbox, lang):
     print('Logical TSR')
     row = 'C' * len(cols) + 'N'
     otsl_string = row * len(rows)
-    corrected_otsl = align_otsl_from_rows_cols(otsl_string, len(rows), len(cols))
+    # corrected_otsl = align_otsl_from_rows_cols(otsl_string, len(rows), len(cols))
+    corrected_otsl = otsl_string
     # Correction
     corrected_otsl = corrected_otsl.replace("E", "C")
     corrected_otsl = corrected_otsl.replace("F", "C")
@@ -162,7 +163,7 @@ def circular_to_txt(img_path, lang):
             if cls == 5:
                 # Tables
                 tab_hocr = get_table_hocr(finalimgtoocr, bbox, lang)
-                hocr_elements += tab_hocr
+                hocr_elements += f'<p bbox=\"{bbox[0]} {bbox[1]} {bbox[2]} {bbox[3]}\">' + tab_hocr + '</p>'
                 tab_cnt += 1
             # elif cls == 2: # Abandon class
             #     continue
