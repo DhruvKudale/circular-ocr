@@ -8,7 +8,7 @@ from PIL import Image
 
 ## EASY OCR
 import easyocr
-reader = easyocr.Reader(['hi','en']) # this needs to run only once to load the model into memory
+reader = easyocr.Reader(['hi']) # this needs to run only once to load the model into memory
 
 # def get_full_table_ocr_data(img, lang="eng"):
 #     """Runs OCR once on the full image and returns word-level bounding boxes."""
@@ -28,7 +28,7 @@ def get_cell_ocr(img, bbox, lang, ocr_engine):
         ocr_result = ocr_result.replace("\n", " ")
         ocr_result = ocr_result[:-1]
     else:
-        ocr_result = get_easy_ocr(cell_pil_img)
+        ocr_result = get_easy_ocr(cell_img)
     return ocr_result.replace("|", "")
 
 

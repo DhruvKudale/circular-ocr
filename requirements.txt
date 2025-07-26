@@ -8,3 +8,4 @@ torch==2.3.0
 torchvision==0.18.0
 transformers==4.45.0
 markdownify
+easyocr==1.7.2
